@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>uplaod stream</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <style>
+      .log-display {
+        background-color: bisque;
+        position: fixed;
+        bottom: 0;
+        height: 200px;
+        width: 100%;
+        overflow: scroll;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>This is a test page</h1>
+    <button onclick="startUpload()">Upload</button>
+
+    <video id="video" autoplay playsInline muted></video>
+    <div class="log-display" id="log">
+
+    </div>
+    <script>
+      let stream, mediaRecorder, mediaBlobs
+
+      function displayLog(str){
+        p = document.createElement('p')
+        p.innerText = str
+        document.getElementById('log').appendChild(p)
+      }
+      function startUpload(){
+        if (!window.MediaRecorder){
+          displayLog('Uncompatible Browser!')
+          return false
+        }
+        if(!MediaRecorder.isTypeSupported('audio/mp4')){
+          displayLog('Uncompatible MimeType: audio/mp4!')
+          return false
+        }
+        if(!MediaRecorder.isTypeSupported('video/mp4')){
+          displayLog('Uncompatible MimeType: video/mp4!')
+          return false
+        }
+        displayLog(navigator.mediaDevices.enumerateDevices())
+        return true
+      }
+    </script>
+  </body>
+</html> 
